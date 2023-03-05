@@ -66,16 +66,19 @@ class SingleLinkedList {
         }
 
         BasicIterator operator++(int) noexcept {
+            assert(node_ != nullptr);
             auto old_value(*this);
             if (node_) { node_ = node_->next_node; };
             return old_value;
         }
 
         [[nodiscard]] reference operator*() const noexcept {
+            assert(node_ != nullptr);
             return node_->value;
         }
 
         [[nodiscard]] pointer operator->() const noexcept {
+            assert(node_ != nullptr);
             return &node_->value;
         }
 
@@ -191,6 +194,8 @@ public:
     }
 
     void PopFront() noexcept {
+        assert(!IsEmpty());
+
         Node* second_el_node = head_.next_node->next_node;
         delete head_.next_node;
         head_.next_node = second_el_node;
